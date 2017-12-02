@@ -12,14 +12,12 @@ target_link_libraries(
 	maptiles
   ${CMAKE_THREAD_LIBS_INIT}
   ${CMAKE_DL_LIBS}
-  ${OPENSCENEGRAPH_LIBRARIES}
-  ${OPENGL_LIBRARIES}
 	)
 
-qt5_use_modules (
-	test_gui
-  Core
-  Gui
-  Widgets
-  OpenGL
-  Xml)
+# qt5_use_modules (
+# 	test_gui
+#   Core
+#   Gui
+#   Widgets
+#   OpenGL
+#   Xml)

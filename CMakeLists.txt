@@ -13,15 +13,17 @@ include ( BuildLocation )
 
 ### Packages
 # Qt
-find_package ( Qt5Core        REQUIRED )
-find_package ( Qt5Gui         REQUIRED )
-find_package ( Qt5Widgets     REQUIRED )
-find_package ( Qt5OpenGL      REQUIRED )
-find_package ( Qt5Xml         REQUIRED )
+# find_package ( Qt5Core        REQUIRED )
+# find_package ( Qt5Gui         REQUIRED )
+# find_package ( Qt5Widgets     REQUIRED )
+# find_package ( Qt5OpenGL      REQUIRED )
+# find_package ( Qt5Xml         REQUIRED )
 # OpenSceneGraph
 find_package ( OpenSceneGraph REQUIRED 
 	             osgViewer osgGA osgDB 
 							 osg osgText )
+# PNG
+find_package ( PNG            REQUIRED )
 # System
 find_package ( OpenGL         REQUIRED )
 find_package ( Threads        REQUIRED )
@@ -29,20 +31,21 @@ find_package ( Threads        REQUIRED )
 
 ### Qt Stuff
 # See for https://cmake.org/cmake/help/v3.0/manual/cmake-qt.7.html
-set ( CMAKE_AUTORCC             ON   )
-set ( CMAKE_INCLUDE_CURRENT_DIR ON   )
-set ( QT_USE_QTOPENGL           TRUE )
+# set ( CMAKE_AUTORCC             ON   )
+# set ( CMAKE_INCLUDE_CURRENT_DIR ON   )
+# set ( QT_USE_QTOPENGL           TRUE )
 # Neccessary for Linux and so on, for -fPIC
-add_definitions(${Qt5Core_DEFINITIONS})
-add_definitions(${Qt5Widgets_DEFINITIONS})
-add_definitions(${Qt5Gui_DEFINITIONS})
-add_definitions(${Qt5OpenGL_DEFINITIONS})
-add_definitions(${Qt5Xml_DEFINITIONS})
+# add_definitions(${Qt5Core_DEFINITIONS})
+# add_definitions(${Qt5Widgets_DEFINITIONS})
+# add_definitions(${Qt5Gui_DEFINITIONS})
+# add_definitions(${Qt5OpenGL_DEFINITIONS})
+# add_definitions(${Qt5Xml_DEFINITIONS})
 
 ### Lib
 file ( GLOB maptiles_src
 	src/*.cpp
 	src/coords/*.cpp
+	src/io/*.cpp
 	)
 
 add_library (
@@ -56,6 +59,14 @@ target_include_directories(
 	PUBLIC 
 	include/
 	${OSG_INCLUDE_DIR}
+	${PNG_INCLUDE_DIR}
+	)
+
+target_link_libraries(
+	maptiles
+	${PNG_LIBRARY}
+  ${OPENSCENEGRAPH_LIBRARIES}
+  ${OPENGL_LIBRARIES}
 	)
 
 
